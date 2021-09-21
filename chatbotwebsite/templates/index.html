@@ -1,24 +1,16 @@
-<!-- {% extends "base.html" %}
-{% block title %}
-Home
-{% endblock %}
-
-{% block content %}
-<h1>Welcome to chatbot home page</h1>
-{% endblock %} -->
-
+{% load static %}
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
  <title></title>
- <link rel="stylesheet" type="text/css" href="style.css">
+ <link rel="stylesheet" type="text/css" href="{% static 'assets/style.css' %}">
  <link href="https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap" rel="stylesheet">
-</head>
-<body>
+  </head>
+<body> 
 <header>
  <div class="mainheader">
   <div class="logo">
-   <img src="images/logo_n.png">
+   <img src="{% static './assets/logo_n.png' %}"> 
   </div>
 
   <nav>
@@ -44,7 +36,7 @@ Home
 
   <section class="right-sec">
    <figure>
-    <img src="images/img.png">
+    <img src="{% static 'assets/img.png' %}"> 
    </figure>
   </section>
  </main>

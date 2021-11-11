@@ -13,4 +13,4 @@ def about(request):
 
 
 def chatpage(request):
-    return render(request, "chatpage.html")
+    return render(request, "login.html")

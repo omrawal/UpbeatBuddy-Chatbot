@@ -1,3 +1,4 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 
@@ -21,6 +22,29 @@
         integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
         crossorigin="anonymous"></script>
     <title>{% block title %} {% endblock %}</title>
+    <div class="m-4">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a href="/" class="navbar-brand">
+                    <img src="{% static 'logo_n.png' %}" height="70" alt="UpbeatBuddy">
+                </a>
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        <a href="/" class="nav-item nav-link active">Home</a>
+                        <a href="/about" class="nav-item nav-link">About</a>
+                        <!-- <a href="#" class="nav-item nav-link">Messages</a> -->
+                        <a href="/logout" class="nav-item nav-link disabled" tabindex="-1">Logout</a>
+                    </div>
+                    <div class="navbar-nav ml-auto">
+                        <a href="/login" class="nav-item nav-link">Login</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
 </head>
 
 

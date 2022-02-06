@@ -11,7 +11,11 @@ def index(request):
 def about(request):
     return render(request, "about.html")
 
-# TODO create a chatpage and login page
+
+def loginPage(request):
+    return render(request, "login.html")
+
+# TODO create a chatpage
 
 
 def chatpage(request):

@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('about/', views.about, name='about'),
-    # TODO create a chatpage and login page
+    path('login/', views.loginPage, name='login'),
+    # TODO create a chatpage
     path('chatpage/', views.chatpage, name='chatpage'),
 ]

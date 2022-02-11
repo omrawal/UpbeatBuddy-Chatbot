@@ -8,4 +8,5 @@ urlpatterns = [
     path('login/', views.loginPage, name='login'),
     # TODO create a chatpage
     path('chatpage/', views.chatpage, name='chatpage'),
+    path('test', views.testpage, name='test'),
 ]

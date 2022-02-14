@@ -25,8 +25,14 @@ class ChatbotUser(models.Model):
     isStudent = models.CharField(
         choices=STUDENT_CHOICES, max_length=20, )
 
+    def __str__(self) -> str:
+        return self.user.username+"__"+str(self.email)
+
 
 class UserScore(models.Model):
     owner = models.ForeignKey(ChatbotUser, on_delete=models.CASCADE)
     score = models.IntegerField()
     updatedAt = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.owner.user.username+'__'+str(self.updatedAt)

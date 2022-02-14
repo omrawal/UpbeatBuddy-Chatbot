@@ -1,48 +1,98 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}
-UpbeatBuddy-Login/Signup
+Login/Register
 {% endblock %}
 
 {% block content %}
+
+
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="{% static 'style2.css'%}" />
 
-
-
 <body>
+
   <div class="container">
     <div class="forms-container">
       <div class="signin-signup">
-        <form action="#" class="sign-in-form">
+        <form action="{% url 'login' %}" method="POST" class="sign-in-form">
+          {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          {% csrf_token %}
+          {% if form3.errors %}
+          <p>There are errors in the form</p>
+          {% endif %}
+          <!-- {{form3}} -->
           <h2 class="title">Sign in</h2>
+
           <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
+            <!-- <i class="fas fa-user"></i>
+                        <input type="text" placeholder="Username" /> -->
+            {{ form3.username.label_tag }}
+            {{ form3.username }}
           </div>
           <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
+            <!-- <i class="fas fa-lock"></i>
+                        <input type="password" placeholder="Password" /> -->
+            {{ form3.password.label_tag }}
+            {{ form3.password }}
           </div>
-          <input type="submit" value="Login" class="btn solid" />
+          <input type="submit" class="btn" value="login" name="login" />
         </form>
-        <form action="#" class="sign-up-form">
+
+        <form action="{% url 'login' %}" method="POST" class="sign-up-form">
+
+          {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+          {% csrf_token %}
+          {% if form1.errors %}
+          <p>There are errors in the form</p>
+          {% endif %}
           <h2 class="title">Sign up</h2>
+
           <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
+            {{ form1.username.label_tag }}
+            {{ form1.username }}
           </div>
           <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" />
+            {{ form1.password1.label_tag }}
+            {{ form1.password1 }}
           </div>
           <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
+            {{ form1.password2.label_tag }}
+            {{ form1.password2 }}
           </div>
-          <input type="submit" class="btn" value="Signup" />
+          <div class="input-field">
+            {{ form2.email.label_tag }}
+            {{ form2.email }}
+          </div>
+          <div class="input-field">
+            {{ form2.age.label_tag }}
+            {{ form2.age }}
+          </div>
+          <div class="input-field">
+            {{ form2.gender.label_tag }}
+            {{ form2.gender }}
+          </div>
+          <div class="input-field">
+            {{ form2.isStudent.label_tag }}
+            {{ form2.isStudent }}
+          </div>
+          <input type="submit" class="btn" value="register" name="register" />
         </form>
       </div>
     </div>
@@ -90,5 +140,4 @@ UpbeatBuddy-Login/Signup
     });
   </script>
 </body>
-
 {% endblock %}

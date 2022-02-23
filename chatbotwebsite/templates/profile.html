@@ -1,9 +1,152 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
 Home
 {% endblock %}
 
 
 {% block content %}
-<h1>Welcome {{request.user}}</h1>
+<main>
+  <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+  <!-- <h1>Welcome {{request.user}}</h1> -->
+
+  <main class="container">
+    <!-- <header class="header">
+      <span class="logo">Upbeat Buddy</span>
+      
+      
+    </header> -->
+    <section class="content">
+
+
+      <section class="conversation">
+        <div class="conversation-header">
+          <div class="conversation-contact">
+            <img src="{% static 'images/canette.jpg' %}" alt="conv-profil">
+
+            <div class="conversation-contact-info">
+              <span class="conversation-name">OM</span>
+              <span class="conversation-online">online</span>
+            </div>
+          </div>
+
+
+        </div>
+        <section class="conversation-content">
+
+          <section class="messages">
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>Hello Ghislain, how are you ?</span>
+                <span>12:36</span>
+              </div>
+            </article>
+
+            <article class="message-container sended">
+              <img src="{% static 'images/montagne.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>I'm good, what about you my friend ?</span>
+                <span>12:40</span>
+              </div>
+            </article>
+
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>Good, I'm fine too</span>
+                <span>12:40</span>
+              </div>
+            </article>
+
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>Please, can you help me ?</span>
+                <span>12:41</span>
+              </div>
+            </article>
+
+            <article class="message-container sended">
+              <img src="{% static 'images/montagne.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>for sure...</span>
+                <span>12:49</span>
+              </div>
+            </article>
+
+            <article class="message-container sended">
+              <img src="{% static 'images/montagne.jpg' %}" alt="message-img">
+
+              <div class="message">
+                <span>How can I help you ?</span>
+                <span>12:50</span>
+              </div>
+            </article>
+
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %" alt="message-img">
+
+              <div class="message">
+                <span>
+                  It's about programming. <br>
+                  I want to learn to code with Flutter and be able to create nice mobile application for
+                  android platform and share my app to Google Play store. <br>
+                  So can you teach me how to code please ?
+                </span>
+                <span>12:55</span>
+              </div>
+            </article>
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %" alt="message-img">
+
+              <div class="message">
+                <span>
+                  It's about programming. <br>
+                  I want to learn to code with Flutter and be able to create nice mobile application for
+                  android platform and share my app to Google Play store. <br>
+                  So can you teach me how to code please ?
+                </span>
+                <span>12:55</span>
+              </div>
+            </article>
+            <article class="message-container">
+              <img src="{% static 'images/canette.jpg' %" alt="message-img">
+
+              <div class="message">
+                <span>
+                  It's about programming. <br>
+                  I want to learn to code with Flutter and be able to create nice mobile application for
+                  android platform and share my app to Google Play store. <br>
+                  So can you teach me how to code please ?
+                </span>
+                <span>12:55</span>
+              </div>
+            </article>
+          </section>
+
+          <div class="conversation-editor">
+            <div class="btn-file">
+              <span class="bi bi-paperclip"></span>
+            </div>
+            <input type="text" placeholder="write a message">
+            <div class="btn-send">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send"
+                viewBox="0 0 16 16">
+                <path
+                  d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+              </svg>
+            </div>
+          </div>
+        </section>
+      </section>
+
+    </section>
+  </main>
+</main>
 {% endblock %}

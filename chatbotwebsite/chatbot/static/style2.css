@@ -5,7 +5,7 @@
   padding: 0;
   box-sizing: border-box;
 }
-
+html { overflow-y: scroll; }
 body,
 input {
   font-family: "Poppins", sans-serif;

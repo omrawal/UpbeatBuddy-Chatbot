@@ -5,7 +5,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
+from .chatbot_queries import getChatbotResponse
 # Create your views here.
+
+CHATS = []  # list of tuples (user_query,bot_response)
 
 
 def index(request):
@@ -53,6 +56,8 @@ def loginPage(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                global CHATS
+                CHATS = []
                 return redirect('profile')
             else:
                 print("User not found")
@@ -72,8 +77,19 @@ def loginPage(request):
 # TODO create a chatpage
 
 
+@login_required(login_url='login')
 def chatPage(request):
-    return render(request, "login.html")
+    global CHATS
+    if request.method == 'POST':
+        print("User sent ->>>", request.POST.get('userquery'))
+        userQuery = request.POST.get('userquery')
+        chat = getChatbotResponse(userQuery=userQuery)
+        # print('first-----', chat)
+        CHATS.append(chat)
+
+    context = {'userdata': [request], 'chats': CHATS}
+    # print('second-----', CHATS)
+    return render(request, "chatpage.html", context=context)
 
 
 @login_required(login_url='login')
@@ -84,6 +100,8 @@ def profilePage(request):
 
 def logoutPage(request):
     logout(request)
+    global CHATS
+    CHATS = []
     return render(request, 'logout.html')
 
 # Test

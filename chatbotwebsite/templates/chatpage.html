@@ -75,7 +75,12 @@ Home
                 <input type="text" name="userquery" placeholder="write a message" style="width:240%"
                   style="float: inline-start;" />
                 <input type="submit" class="btn-info " value="send" name="send" style="float: inline-end;" />
+                {% if activate %}
+                <input type="submit" class="btn-success " value="Check Emotion" name="Check Emotion" />
+                {{sentiments}}
+                {% endif %}
               </form>
+
 
             </div>
           </section>

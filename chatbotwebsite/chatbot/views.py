@@ -5,7 +5,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .chatbot_queries import getChatbotResponse
+from .helper_function import getChatbotResponse, getSentimentalResponse
+from .helper_function import getSentenceListFromChats
 # Create your views here.
 
 CHATS = []  # list of tuples (user_query,bot_response)
@@ -80,14 +81,24 @@ def loginPage(request):
 @login_required(login_url='login')
 def chatPage(request):
     global CHATS
+    sentiments = None
     if request.method == 'POST':
-        print("User sent ->>>", request.POST.get('userquery'))
-        userQuery = request.POST.get('userquery')
-        chat = getChatbotResponse(userQuery=userQuery)
-        # print('first-----', chat)
-        CHATS.append(chat)
-
-    context = {'userdata': [request], 'chats': CHATS}
+        if('send' in request.POST):
+            print("User sent ->>>", request.POST.get('userquery'))
+            userQuery = request.POST.get('userquery')
+            chat = getChatbotResponse(userQuery=userQuery)
+            # print('first-----', chat)
+            CHATS.append(chat)
+        if('Check Emotion' in request.POST):
+            print("User tried to check ->>>")
+            sentList = getSentenceListFromChats(chats=CHATS)
+            sentiments = getSentimentalResponse(sentenceList=sentList)
+            print('Sentiments are ->', sentiments)
+    activate = False
+    if(len(CHATS) > 5):
+        activate = True
+    context = {'userdata': [request], 'chats': CHATS,
+               'sentiments': sentiments, 'activate': activate}
     # print('second-----', CHATS)
     return render(request, "chatpage.html", context=context)
 

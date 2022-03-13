@@ -8,6 +8,7 @@ from django.contrib import messages
 from .helper_function import getChatbotResponse, getSentimentalResponse
 from .helper_function import getSentenceListFromChats
 from .models import UserScore, ChatbotUser
+from datetime import datetime
 # Create your views here.
 
 CHATS = []  # list of tuples (user_query,bot_response)
@@ -112,9 +113,18 @@ def chatPage(request):
 
 @login_required(login_url='login')
 def profilePage(request):
-
-    context = {'userdata': [request]}
-    return(render(request, "profile.html"))
+    scoreobj = UserScore.objects.filter(
+        owner=ChatbotUser.objects.get(user=request.user))
+    print(scoreobj)
+    userScoreData = []
+    for scr in scoreobj:
+        k = ('score =', scr.score, ' pos = ',
+             scr.posCount, ' neg = ', scr.negCount, ' date= ', scr.updatedAt.strftime(
+                 "%d/%m/%Y - %H:%M:%S"))
+        print(k)
+        userScoreData.append(k)
+    context = {'scores': userScoreData}
+    return(render(request, "profile.html", context=context))
 
 
 def logoutPage(request):

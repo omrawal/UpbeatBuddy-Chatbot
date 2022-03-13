@@ -9,5 +9,9 @@ Home
 <main>
   <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
   <h1>Welcome {{request.user}}</h1>
+  <hr>
+  {%for score in scores%}
+  <p>{{score}}</p>
+  {%endfor%}
 </main>
 {% endblock %}

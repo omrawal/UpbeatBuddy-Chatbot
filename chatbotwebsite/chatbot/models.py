@@ -31,7 +31,9 @@ class ChatbotUser(models.Model):
 
 class UserScore(models.Model):
     owner = models.ForeignKey(ChatbotUser, on_delete=models.CASCADE)
-    score = models.IntegerField()
+    score = models.FloatField(default=0.0)
+    posCount = models.IntegerField(default=0)
+    negCount = models.IntegerField(default=0)
     updatedAt = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:

@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .helper_function import getChatbotResponse, getSentimentalResponse
 from .helper_function import getSentenceListFromChats
+from .models import UserScore, ChatbotUser
 # Create your views here.
 
 CHATS = []  # list of tuples (user_query,bot_response)
@@ -75,8 +76,6 @@ def loginPage(request):
         context = {'form1': form1, 'form2': form2, 'form3': form3}
         return render(request, "login.html", context)
 
-# TODO create a chatpage
-
 
 @login_required(login_url='login')
 def chatPage(request):
@@ -94,6 +93,14 @@ def chatPage(request):
             sentList = getSentenceListFromChats(chats=CHATS)
             sentiments = getSentimentalResponse(sentenceList=sentList)
             print('Sentiments are ->', sentiments)
+            # saving the score
+            chatbotUserObj = ChatbotUser.objects.get(user=request.user)
+            scoreObj = UserScore(owner=chatbotUserObj,
+                                 score=sentiments['total_score'],
+                                 posCount=sentiments['positive_score'],
+                                 negCount=sentiments['negative_score'])
+            scoreObj.save()
+
     activate = False
     if(len(CHATS) > 5):
         activate = True
@@ -105,6 +112,7 @@ def chatPage(request):
 
 @login_required(login_url='login')
 def profilePage(request):
+
     context = {'userdata': [request]}
     return(render(request, "profile.html"))
 

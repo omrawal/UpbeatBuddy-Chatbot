@@ -5,13 +5,74 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
-from .helper_function import getChatbotResponse, getSentimentalResponse
-from .helper_function import getSentenceListFromChats
 from .models import UserScore, ChatbotUser
 from datetime import datetime
+from requests.exceptions import ConnectionError
+import requests
 # Create your views here.
 
 CHATS = []  # list of tuples (user_query,bot_response)
+# CHATBOT_URL = 'http://localhost:5000/'
+CHATBOT_URL = 'http://localhost:5200/'
+# SENTIMENT_URL = 'http://localhost:5500/'
+SENTIMENT_URL = 'http://localhost:5300/'
+
+
+# helper methods
+
+def checkUrl(url):
+    try:
+        request = requests.get(url)
+    except ConnectionError:
+        return False
+    else:
+        return True
+
+
+def getChatbotResponse(userQuery):
+    global CHATBOT_URL
+    # response = requests.get(
+    #     url=CHATBOT_URL+userQuery)
+    response = requests.post(url=CHATBOT_URL, params={
+                             'userQuery': str(userQuery)})
+    responseJson = response.json()
+    res = (responseJson['user_query'], responseJson['chatbot_response'])
+    return res
+
+
+def getSentenceListFromChats(chats):
+    sentenceList = []
+    for conv in chats:
+        sentenceList.append(conv[0])
+    return sentenceList
+
+
+def getSentimentalResponse(sentenceList):
+    global SENTIMENT_URL
+    response = requests.post(url=SENTIMENT_URL, params={
+                             'sentList': str(sentenceList)})
+    responseJson = response.json()
+    return responseJson
+
+
+def setChatbotUrl(url):
+    global CHATBOT_URL
+    CHATBOT_URL = url
+
+
+def setSentimentUrl(url):
+    global SENTIMENT_URL
+    SENTIMENT_URL = url
+
+
+def getChatbotUrl():
+    global CHATBOT_URL
+    return CHATBOT_URL
+
+
+def getSentimentUrl():
+    global SENTIMENT_URL
+    return SENTIMENT_URL
 
 
 def index(request):
@@ -80,6 +141,10 @@ def loginPage(request):
 
 @login_required(login_url='login')
 def chatPage(request):
+    chatbot_url = getChatbotUrl()
+    sentiment_url = getSentimentUrl()
+    if(checkUrl(chatbot_url) == False or checkUrl(sentiment_url) == False):
+        return redirect('linkpage')
     global CHATS
     sentiments = None
     if request.method == 'POST':
@@ -132,6 +197,30 @@ def logoutPage(request):
     global CHATS
     CHATS = []
     return render(request, 'logout.html')
+
+
+@login_required(login_url='login')
+def linkPage(request):
+    chatbot_url = getChatbotUrl()
+    sentiment_url = getSentimentUrl()
+    print('chaturl= ', chatbot_url, ' sentiment_url= ', sentiment_url)
+    chatbotAPIStatus = False
+    sentimentAPIStatus = False
+    if(checkUrl(chatbot_url)):
+        chatbotAPIStatus = True
+    if(checkUrl(sentiment_url)):
+        sentimentAPIStatus = True
+    context = {'chatbotAPI': chatbotAPIStatus,
+               'sentimentAPI': sentimentAPIStatus}
+    if request.method == 'POST':
+        newChatbotURL = request.POST.get('chatbotLink')
+        newSentimentURL = request.POST.get('sentimentLink')
+        if(newChatbotURL is not None and newChatbotURL != ''):
+            setChatbotUrl(newChatbotURL)
+        if(newSentimentURL is not None and newSentimentURL != ''):
+            setSentimentUrl(newSentimentURL)
+        return redirect('chatpage')
+    return render(request, 'link.html', context=context)
 
 # Test
 # Test@123

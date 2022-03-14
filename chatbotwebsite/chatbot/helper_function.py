@@ -1,7 +1,9 @@
 from requests.exceptions import ConnectionError
 import requests
 CHATBOT_URL = 'http://localhost:5000/'
+# CHATBOT_URL = 'http://localhost:5200/'
 SENTIMENT_URL = 'http://localhost:5500/'
+# SENTIMENT_URL = 'http://localhost:5300/'
 
 
 def checkUrl(url):
@@ -15,8 +17,10 @@ def checkUrl(url):
 
 def getChatbotResponse(userQuery):
     global CHATBOT_URL
-    response = requests.get(
-        url=CHATBOT_URL+userQuery)
+    # response = requests.get(
+    #     url=CHATBOT_URL+userQuery)
+    response = requests.post(url=CHATBOT_URL, params={
+                             'userQuery': str(userQuery)})
     responseJson = response.json()
     res = (responseJson['user_query'], responseJson['chatbot_response'])
     return res
@@ -34,7 +38,6 @@ def getSentimentalResponse(sentenceList):
     response = requests.post(url=SENTIMENT_URL, params={
                              'sentList': str(sentenceList)})
     responseJson = response.json()
-    # res = (responseJson['user_query'], responseJson['chatbot_response'])
     return responseJson
 
 
@@ -46,6 +49,16 @@ def setChatbotUrl(url):
 def setSentimentUrl(url):
     global SENTIMENT_URL
     SENTIMENT_URL = url
+
+
+def getChatbotUrl():
+    global CHATBOT_URL
+    return CHATBOT_URL
+
+
+def getSentimentUrl():
+    global SENTIMENT_URL
+    return SENTIMENT_URL
 
 
 # print(getSentimentalResponse(['I am so sad', "All the misfortunes are given to me", "This was a very bad day",

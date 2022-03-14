@@ -11,5 +11,5 @@ urlpatterns = [
     # path('test', views.testpage, name='test'),
     path('profile/', views.profilePage, name='profile'),
     path('logout/', views.logoutPage, name='logout'),
-    # path('register', views.registerpage, name='register'),
+    path('linkpage/', views.linkPage, name='linkpage'),
 ]

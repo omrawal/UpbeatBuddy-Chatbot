@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+Update Link
+{% endblock %}
+
+
+{% block content %}
+<main>
+  <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+  <h3>If you are seeing this it means one or more of our APIs are offline</h3>
+  <h3>Please contact the administrators/developers to get the API links and paste them below</h3>
+  <hr>
+  {% if chatbotAPI %}
+  <h4>Chatbot API Status: Working &#9989;</h4>
+  {% else %}
+  <h4>Chatbot API Status: Not Working &#10060;</h4>
+  {% endif %}
+
+  {% if sentimentAPI %}
+  <h4>Sentiment Analysis API Status: Working &#9989;</h4>
+  {% else %}
+  <h4>Sentiment Analysis API Status: Not Working &#10060;</h4>
+  {% endif %}
+
+
+
+
+  <form action="{% url 'linkpage' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="chatbotLink" placeholder="Chatbot API Link" style="width:80%"
+      style="float: inline-start;" />
+    <input type="text" name="sentimentLink" placeholder="Sentiment API Link" style="width:80%"
+      style="float: inline-start;" />
+    <br>
+    <input type="submit" class="btn-info " value="Submit" name="Submit" style="float: inline-end;" />
+  </form>
+
+</main>
+{% endblock %}

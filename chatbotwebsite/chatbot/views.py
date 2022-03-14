@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from .models import UserScore, ChatbotUser
 from datetime import datetime
+import pytz
 from requests.exceptions import ConnectionError
 import requests
 # Create your views here.
@@ -36,7 +37,11 @@ def getChatbotResponse(userQuery):
     response = requests.post(url=CHATBOT_URL, params={
                              'userQuery': str(userQuery)})
     responseJson = response.json()
-    res = (responseJson['user_query'], responseJson['chatbot_response'])
+    res = (responseJson['user_query'],
+           responseJson['chatbot_response'],
+           datetime.now(pytz.timezone('Asia/Kolkata')
+                        ).strftime("%d-%m-%Y %H:%M:%S"),
+           )
     return res
 
 
@@ -171,7 +176,8 @@ def chatPage(request):
     if(len(CHATS) > 5):
         activate = True
     context = {'userdata': [request], 'chats': CHATS,
-               'sentiments': sentiments, 'activate': activate}
+               'sentiments': sentiments, 'activate': activate, 'now': datetime.now(pytz.timezone('Asia/Kolkata')
+                                                                                   ).strftime("%d-%m-%Y %H:%M:%S"), }
     # print('second-----', CHATS)
     return render(request, "chatpage.html", context=context)
 

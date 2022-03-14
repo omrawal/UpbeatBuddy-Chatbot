@@ -39,7 +39,8 @@ Chatpage
               <img src="{% static 'chatbot_logo.png' %}" alt="message-img">
 
               <div class="message">
-                <span>Hello {{request.user}}, how are you ?</span><span>12:55</span>
+                <span>Hello {{request.user}}, how are you ?</span>
+                <hr><span>{{now}}</span>
               </div>
             </article>
             {% for item in chats %}
@@ -48,7 +49,8 @@ Chatpage
               <img src="{% static 'human_logo.png' %}" alt="message-img">
 
               <div class="message">
-                <span>{{ item.0 }}</span><span>12:55</span>
+                <span>{{ item.0 }}</span>
+                <hr><span>{{ item.2 }}</span>
               </div>
             </article>
 
@@ -57,7 +59,8 @@ Chatpage
               <img src="{% static 'chatbot_logo.png' %}" alt="message-img">
 
               <div class="message">
-                <span>{{ item.1 }}</span><span>12:55</span>
+                <span>{{ item.1 }}</span>
+                <hr><span>{{ item.2 }}</span>
               </div>
             </article>
             {% endfor %}

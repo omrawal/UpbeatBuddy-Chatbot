@@ -12,10 +12,10 @@ import requests
 # Create your views here.
 
 CHATS = []  # list of tuples (user_query,bot_response)
-# CHATBOT_URL = 'http://localhost:5000/'
-CHATBOT_URL = 'http://localhost:5200/'
-# SENTIMENT_URL = 'http://localhost:5500/'
-SENTIMENT_URL = 'http://localhost:5300/'
+CHATBOT_URL = 'http://localhost:5000/'
+# CHATBOT_URL = 'http://localhost:5200/'
+SENTIMENT_URL = 'http://localhost:5500/'
+# SENTIMENT_URL = 'http://localhost:5300/'
 
 
 # helper methods

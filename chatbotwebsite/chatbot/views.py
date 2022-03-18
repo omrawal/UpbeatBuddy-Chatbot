@@ -1,3 +1,4 @@
+from json import dump, dumps
 from .forms import ChatbotUserForm
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, request
@@ -184,17 +185,36 @@ def chatPage(request):
 
 @login_required(login_url='login')
 def profilePage(request):
+    current = ChatbotUser.objects.get(user=request.user)
     scoreobj = UserScore.objects.filter(
-        owner=ChatbotUser.objects.get(user=request.user))
+        owner=current)
     print(scoreobj)
     userScoreData = []
+    xValues = []  # date time
+    yValues = []  # score
+    posValues = []  # positive values
+    negValues = []  # negative values
+
     for scr in scoreobj:
         k = ('score =', scr.score, ' pos = ',
              scr.posCount, ' neg = ', scr.negCount, ' date= ', scr.updatedAt.strftime(
                  "%d/%m/%Y - %H:%M:%S"))
         print(k)
+        # xValues.append(int(scr.updatedAt.strftime(
+        #     "%d")))
+        xValues.append(int(scr.updatedAt.strftime(
+            "%d")+scr.updatedAt.strftime(
+            "%m")+scr.updatedAt.strftime(
+            "%Y")))
+        yValues.append(int(scr.score*100))
+        posValues.append(scr.posCount)
+        negValues.append(scr.negCount)
         userScoreData.append(k)
-    context = {'scores': userScoreData}
+    #     var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+    #   var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+    context = {'scores': userScoreData, 'xValues': xValues, 'yValues': yValues, 'posVal': sum(
+        posValues), 'negVal': sum(negValues), 'avgScore': round(sum(yValues)/len(yValues), 2), 'age': current.age, 'email': current.email}
+    print(context)
     return(render(request, "profile.html", context=context))
 
 

@@ -174,7 +174,7 @@ def chatPage(request):
             scoreObj.save()
 
     activate = False
-    if(len(CHATS) > 5):
+    if(len(CHATS) > 2):
         activate = True
     context = {'userdata': [request], 'chats': CHATS,
                'sentiments': sentiments, 'activate': activate, 'now': datetime.now(pytz.timezone('Asia/Kolkata')

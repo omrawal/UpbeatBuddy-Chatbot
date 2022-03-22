@@ -28,6 +28,16 @@ Profile
     display: table;
     clear: both;
   }
+
+  th,
+  td {
+    border-bottom: 1px solid rgb(46, 44, 44);
+    border: 1px solid;
+  }
+
+  tr:hover {
+    background-color: cyan;
+  }
 </style>
 <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
 <!-- <h1>Welcome {{request.user}}</h1> -->
@@ -74,6 +84,30 @@ Profile
         }
       });
     </script>
+    <br>
+    <table>
+      <tr>
+        <th>Score range</th>
+        <th>Meaning</th>
+      </tr>
+      <tr>
+        <td>70%-100%</td>
+        <td>Super Happy</td>
+      </tr>
+      <tr>
+        <td>50%-70%</td>
+        <td>Happy like every other human</td>
+      </tr>
+      <tr>
+        <td>30%-50%</td>
+        <td>On a path to happiness</td>
+      </tr>
+      <tr>
+        <td>0%-30%</td>
+        <td>Find happiness in small things</td>
+      </tr>
+      <tr>
+    </table>
 
 
 
@@ -92,6 +126,7 @@ Profile
           Average Score : {{avgScore}}%
         </button>
         <br>
+        <p>A score between 50%-70% is considered good enough for an average human being.</p>
         <br>
         <button class="primary ghost">
           Happy Sentence Count : {{posVal}}

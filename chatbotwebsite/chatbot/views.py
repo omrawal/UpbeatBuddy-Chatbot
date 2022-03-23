@@ -188,32 +188,38 @@ def profilePage(request):
     current = ChatbotUser.objects.get(user=request.user)
     scoreobj = UserScore.objects.filter(
         owner=current)
-    print(scoreobj)
-    userScoreData = []
-    xValues = []  # date time
-    yValues = []  # score
-    posValues = []  # positive values
-    negValues = []  # negative values
 
-    for scr in scoreobj:
-        k = ('score =', scr.score, ' pos = ',
-             scr.posCount, ' neg = ', scr.negCount, ' date= ', scr.updatedAt.strftime(
-                 "%d/%m/%Y - %H:%M:%S"))
-        print(k)
-        # xValues.append(int(scr.updatedAt.strftime(
-        #     "%d")))
-        xValues.append(int(scr.updatedAt.strftime(
-            "%d")+scr.updatedAt.strftime(
-            "%m")+scr.updatedAt.strftime(
-            "%Y")))
-        yValues.append(int(scr.score*100))
-        posValues.append(scr.posCount)
-        negValues.append(scr.negCount)
-        userScoreData.append(k)
-    #     var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-    #   var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
-    context = {'scores': userScoreData, 'xValues': xValues, 'yValues': yValues, 'posVal': sum(
-        posValues), 'negVal': sum(negValues), 'avgScore': round(sum(yValues)/len(yValues), 2), 'age': current.age, 'email': current.email}
+    print(len(scoreobj))
+
+    context = {'newUser': True, 'scores': [('score =', 0, ' pos = ',
+                                            0, ' neg = ', 0, ' date= ', "No Date")], 'xValues': [0], 'yValues': [
+        0], 'posVal': 0, 'negVal': 0, 'avgScore': 0, 'age': current.age, 'email': current.email}
+    if(len(scoreobj) != 0):
+        userScoreData = []
+        xValues = []  # date time
+        yValues = []  # score
+        posValues = []  # positive values
+        negValues = []  # negative values
+
+        for scr in scoreobj:
+            k = ('score =', scr.score, ' pos = ',
+                 scr.posCount, ' neg = ', scr.negCount, ' date= ', scr.updatedAt.strftime(
+                     "%d/%m/%Y - %H:%M:%S"))
+            print(k)
+            # xValues.append(int(scr.updatedAt.strftime(
+            #     "%d")))
+            xValues.append(int(scr.updatedAt.strftime(
+                "%d")+scr.updatedAt.strftime(
+                "%m")+scr.updatedAt.strftime(
+                "%Y")))
+            yValues.append(int(scr.score*100))
+            posValues.append(scr.posCount)
+            negValues.append(scr.negCount)
+            userScoreData.append(k)
+        #     var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
+        #   var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
+        context = {'newUser': False, 'scores': userScoreData, 'xValues': xValues, 'yValues': yValues, 'posVal': sum(
+            posValues), 'negVal': sum(negValues), 'avgScore': round(sum(yValues)/len(yValues), 2), 'age': current.age, 'email': current.email}
     print(context)
     return(render(request, "profile.html", context=context))
 

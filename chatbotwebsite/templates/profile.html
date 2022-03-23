@@ -46,7 +46,9 @@ Profile
 <p>{{score}}</p>
 {%endfor%} -->
 <!-- <h2>Profile Page</h2> -->
-
+{%if newUser %}
+<h3>Please chat to get happiness index</h3>
+{%else%}
 <div class="row" style="background-color:white;">
   <div class="column">
     <!--     <h2>Column 1</h2>
@@ -56,6 +58,8 @@ Profile
     <br>
     <h2>Let's have a look at your progress</h2>
     <!--     <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
+
+
 
     <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
@@ -84,6 +88,7 @@ Profile
         }
       });
     </script>
+
     <br>
     <table>
       <tr>
@@ -146,16 +151,7 @@ Profile
       </div>
     </div>
 
-    <!-- <footer>
-	<p>
-		Created with <i class="fa fa-heart"></i> by
-		<a target="_blank" href="https://florin-pop.com">Florin Pop</a>
-		- Read how I created this
-		<a target="_blank" href="https://florin-pop.com/blog/2019/04/profile-card-design">here</a>
-		- Design made by
-		<a target="_blank" href="https://dribbble.com/shots/6276930-Profile-Card-UI-Design">Ildiesign</a>
-	</p>
-</footer> -->
   </div>
 </div>
+{%endif%}
 {% endblock %}

@@ -1,7 +1,7 @@
 *{
     margin: 0; padding: 0;
     box-sizing: border-box;
-    font-family: 'Josefin Sans', sans-serif;
+    /* font-family: 'Josefin Sans', sans-serif; */
     }
     
     header{
@@ -96,4 +96,7 @@
      background-image: linear-gradient(to right,#649bff,#0070fa,#649bff);
      border-radius: 10px;
     }
+    input, button{
+    margin:0;
+}
 html { overflow-y: scroll; }

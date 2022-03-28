@@ -13,19 +13,19 @@ class ChatbotUser(models.Model):
         User, on_delete=models.CASCADE, primary_key=True)
     age = models.PositiveIntegerField()
     email = models.EmailField(unique=True, null=True,)
-    GENDER_CHOICES = (
-        ('male', 'Male'),
-        ('female', 'Female')
-    )
-    STUDENT_CHOICES = (
-        ('student', 'Student'),
-        ('nostudent', 'Not a Student')
-    )
-    # True = male ; False = Female
-    gender = models.CharField(choices=GENDER_CHOICES,
-                              max_length=20, )
-    isStudent = models.CharField(
-        choices=STUDENT_CHOICES, max_length=20, )
+    # GENDER_CHOICES = (
+    #     ('male', 'Male'),
+    #     ('female', 'Female')
+    # )
+    # STUDENT_CHOICES = (
+    #     ('student', 'Student'),
+    #     ('nostudent', 'Not a Student')
+    # )
+    # # True = male ; False = Female
+    # gender = models.CharField(choices=GENDER_CHOICES,
+    #                           max_length=20, )
+    # isStudent = models.CharField(
+    #     choices=STUDENT_CHOICES, max_length=20, )
 
     def __str__(self) -> str:
         return self.user.username+"__"+str(self.email)

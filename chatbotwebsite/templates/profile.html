@@ -39,119 +39,124 @@ Profile
     background-color: cyan;
   }
 </style>
-<link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}">
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}"> -->
 <!-- <h1>Welcome {{request.user}}</h1> -->
 <hr>
 <!-- {%for score in scores%}
 <p>{{score}}</p>
 {%endfor%} -->
 <!-- <h2>Profile Page</h2> -->
+
+
 {%if newUser %}
 <h3>Please chat to get happiness index</h3>
 {%else%}
-<div class="row" style="background-color:white;">
-  <div class="column">
-    <!--     <h2>Column 1</h2>
+<main class="container">
+  <div class="row" style="background-color:white;">
+    <div class="column">
+      <!--     <h2>Column 1</h2>
     <p>Some text..</p> -->
-    <br>
-    <br>
-    <br>
-    <h2>Let's have a look at your progress</h2>
-    <!--     <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
+      <br>
+      <br>
+      <br>
+      <h2>Let's have a look at your progress</h2>
+      <!--     <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
 
 
 
-    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
 
-    <script>
+      <script>
 
-      var xValues = JSON.parse("{{ xValues|escapejs }}");
-      var yValues = JSON.parse("{{ yValues|escapejs }}");
+        var xValues = JSON.parse("{{ xValues|escapejs }}");
+        var yValues = JSON.parse("{{ yValues|escapejs }}");
 
-      new Chart("myChart", {
-        type: "line",
-        data: {
-          labels: xValues,
-          datasets: [{
-            fill: false,
-            lineTension: 0,
-            backgroundColor: "rgba(0,0,255,1.0)",
-            borderColor: "rgba(0,0,255,0.1)",
-            data: yValues
-          }]
-        },
-        options: {
-          legend: { display: false },
-          scales: {
-            yAxes: [{ ticks: { min: 0, max: 100 } }],
+        new Chart("myChart", {
+          type: "line",
+          data: {
+            labels: xValues,
+            datasets: [{
+              fill: false,
+              lineTension: 0,
+              backgroundColor: "rgba(0,0,255,1.0)",
+              borderColor: "rgba(0,0,255,0.1)",
+              data: yValues
+            }]
+          },
+          options: {
+            legend: { display: false },
+            scales: {
+              yAxes: [{ ticks: { min: 0, max: 100 } }],
+            }
           }
-        }
-      });
-    </script>
+        });
+      </script>
 
-    <br>
-    <table>
-      <tr>
-        <th>Score range</th>
-        <th>Meaning</th>
-      </tr>
-      <tr>
-        <td>70%-100%</td>
-        <td>Super Happy</td>
-      </tr>
-      <tr>
-        <td>50%-70%</td>
-        <td>Happy like every other human</td>
-      </tr>
-      <tr>
-        <td>30%-50%</td>
-        <td>On a path to happiness</td>
-      </tr>
-      <tr>
-        <td>0%-30%</td>
-        <td>Find happiness in small things</td>
-      </tr>
-      <tr>
-    </table>
-
+      <br>
+      <table>
+        <tr>
+          <th>Score range</th>
+          <th>Meaning</th>
+        </tr>
+        <tr>
+          <td>70%-100%</td>
+          <td>Super Happy</td>
+        </tr>
+        <tr>
+          <td>50%-70%</td>
+          <td>Happy like every other human</td>
+        </tr>
+        <tr>
+          <td>30%-50%</td>
+          <td>On a path to happiness</td>
+        </tr>
+        <tr>
+          <td>0%-30%</td>
+          <td>Find happiness in small things</td>
+        </tr>
+        <tr>
+      </table>
 
 
-  </div>
-  <div class="column" style="background-color:white;">
-    <!-- <h2>Column 2</h2>
-    <p>Some text..</p> -->
-    <div class="card-container">
-      <!-- 	<span class="pro">PRO</span> -->
-      <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
-      <h3>{{request.user}}</h3>
-      <h6>Age : {{age}}</h6>
-      <p>E-mail: {{email}}</p>
-      <div class="buttons">
-        <button class="primary">
-          Average Score : {{avgScore}}%
-        </button>
-        <br>
-        <p>A score between 50%-70% is considered good enough for an average human being.</p>
-        <br>
-        <button class="primary ghost">
-          Happy Sentence Count : {{posVal}}
-          <br>
-          Sad Senetnce Count :{{negVal}}
-          <br>
-          Total Score :{{avgScore}}%
-        </button>
-      </div>
-      <div class="skills">
-        <h6>Remedies Suggested </h6>
-        <ul>
-          <li>Go for a walk on daily basis</li>
-          <li>Take a break</li>
-          <li>Meditate Regularly</li>
-        </ul>
-      </div>
+
     </div>
+    <div class="column" style="background-color:white;">
+      <!-- <h2>Column 2</h2>
+    <p>Some text..</p> -->
+      <div class="card-container">
+        <!-- 	<span class="pro">PRO</span> -->
+        <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
+        <h3>{{request.user}}</h3>
+        <h6>Age : {{age}}</h6>
+        <p>E-mail: {{email}}</p>
+        <div class="buttons">
+          <button class="primary">
+            Average Score : {{avgScore}}%
+          </button>
+          <br>
+          <p>A score between 50%-70% is considered good enough for an average human being.</p>
+          <br>
+          <button class="primary ghost">
+            Happy Sentence Count : {{posVal}}
+            <br>
+            Sad Senetnce Count :{{negVal}}
+            <br>
+            Total Score :{{avgScore}}%
+          </button>
+        </div>
+        <div class="skills">
+          <h6>Remedies Suggested </h6>
+          <ul>
+            <li>Go for a walk on daily basis</li>
+            <li>Take a break</li>
+            <li>Meditate Regularly</li>
+          </ul>
+        </div>
+      </div>
 
+    </div>
   </div>
-</div>
+</main>
+
 {%endif%}
 {% endblock %}

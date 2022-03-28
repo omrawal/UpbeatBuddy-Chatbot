@@ -5,14 +5,13 @@
 }
 
 body {
-	/*  background-color: #28223F; */
   background-color:#AFEEEE;
-	font-family: Montserrat, sans-serif;
+	/* font-family: Montserrat, sans-serif; */
 	
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
+	/* display: flex; */
+	/* align-items: center; */
+	/* justify-content: center; */
+	/* flex-direction: column; */
 
 	min-height: 100vh;
 	margin: 0;
@@ -99,7 +98,7 @@ button.primary.ghost {
 	padding: 7px;
 }
 
-footer {
+/* footer {
     background-color: #222;
     color: #fff;
     font-size: 14px;
@@ -122,4 +121,4 @@ footer i {
 footer a {
     color: #3c97bf;
     text-decoration: none;
-}
+} */

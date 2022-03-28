@@ -72,20 +72,29 @@ Chatpage
             <br>
             <br>
             <br><br>
-            <div class="conversation-editor">
-              <form action="{% url 'chatpage' %}" method="post">
+            <form action="{% url 'chatpage' %}" method="post">
+              <div class="conversation-editor">
+                <!-- Safe -->
+
                 {% csrf_token %}
-                <input type="text" name="userquery" placeholder="write a message" style="width:240%"
-                  style="float: inline-start;" />
-                <input type="submit" class="btn-info " value="send" name="send" style="float: inline-end;" />
+                <input type="text" name="userquery" placeholder="Write a message" style="width:240%"
+                  style="float: inline-block;" />
+                <input type="submit" class="btn-info " value="Send" name="Send" style="float: inline-block" />
                 {% if activate %}
                 <input type="submit" class="btn-success " value="Check Emotion" name="Check Emotion" />
-                {{sentiments}}
                 {% endif %}
-              </form>
 
 
-            </div>
+
+                <!-- <input type="text" name="userquery" placeholder="write a message" style="width:240%"
+                style="float: inline-block;" />
+              <input type="submit" class="btn-info " value="send" name="send" style="float: inline-block" />
+
+              </form> -->
+
+
+              </div>
+            </form>
           </section>
 
 

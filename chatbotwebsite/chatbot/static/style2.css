@@ -69,6 +69,8 @@ form.sign-in-form {
 .input-field {
   max-width: 380px;
   width: 100%;
+  /* max-width: 500px;
+  width: 200%; */
   background-color: #f0f0f0;
   margin: 10px 0;
   height: 55px;
@@ -80,6 +82,13 @@ form.sign-in-form {
 }
 
 .input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+.input-field label{
   text-align: center;
   line-height: 55px;
   color: #acacac;

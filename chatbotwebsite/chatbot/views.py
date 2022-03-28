@@ -147,14 +147,14 @@ def loginPage(request):
 
 @login_required(login_url='login')
 def chatPage(request):
-    chatbot_url = getChatbotUrl()
-    sentiment_url = getSentimentUrl()
-    if(checkUrl(chatbot_url) == False or checkUrl(sentiment_url) == False):
-        return redirect('linkpage')
+    # chatbot_url = getChatbotUrl()
+    # sentiment_url = getSentimentUrl()
+    # if(checkUrl(chatbot_url) == False or checkUrl(sentiment_url) == False):
+    #     return redirect('linkpage')
     global CHATS
     sentiments = None
     if request.method == 'POST':
-        if('send' in request.POST):
+        if('Send' in request.POST):
             print("User sent ->>>", request.POST.get('userquery'))
             userQuery = request.POST.get('userquery')
             chat = getChatbotResponse(userQuery=userQuery)
@@ -174,7 +174,7 @@ def chatPage(request):
             scoreObj.save()
 
     activate = False
-    if(len(CHATS) > 2):
+    if(len(CHATS) > 5):
         activate = True
     context = {'userdata': [request], 'chats': CHATS,
                'sentiments': sentiments, 'activate': activate, 'now': datetime.now(pytz.timezone('Asia/Kolkata')

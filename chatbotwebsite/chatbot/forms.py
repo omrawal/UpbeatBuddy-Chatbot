@@ -10,12 +10,14 @@ class ChatbotUserForm(forms.ModelForm):
         # fields = '__all__'
         # fields = ('age', 'gender', 'isStudent', 'username',
         #           'password', 'firstname', 'lastname', 'email')
-        fields = ('email', 'age', 'gender', 'isStudent')
+        fields = ('email', 'age',
+                  #  'gender', 'isStudent'
+                  )
         labels = {
             "email": "email",
             "age": "age",
-            "gender": "gender",
-            "isStudent": "isStudent",
+            # "gender": "gender",
+            # "isStudent": "isStudent",
         }
 
 

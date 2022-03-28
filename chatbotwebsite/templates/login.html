@@ -36,13 +36,13 @@ Login/Register
           <div class="input-field">
             <!-- <i class="fas fa-user"></i>
                         <input type="text" placeholder="Username" /> -->
-            {{ form3.username.label_tag }}
+            <p>Username:</p>
             {{ form3.username }}
           </div>
           <div class="input-field">
             <!-- <i class="fas fa-lock"></i>
                         <input type="password" placeholder="Password" /> -->
-            {{ form3.password.label_tag }}
+            <p>Password:</p>
             {{ form3.password }}
           </div>
           <input type="submit" class="btn" value="login" name="login" />
@@ -65,33 +65,33 @@ Login/Register
           <h2 class="title">Sign up</h2>
 
           <div class="input-field">
-            {{ form1.username.label_tag }}
+            <p>Username:</p>
             {{ form1.username }}
           </div>
           <div class="input-field">
-            {{ form1.password1.label_tag }}
+            <p>Password:</p>
             {{ form1.password1 }}
           </div>
           <div class="input-field">
-            {{ form1.password2.label_tag }}
+            <p>Confirm password:</p>
             {{ form1.password2 }}
           </div>
           <div class="input-field">
-            {{ form2.email.label_tag }}
+            <p>Email:</p>
             {{ form2.email }}
           </div>
           <div class="input-field">
-            {{ form2.age.label_tag }}
+            <p>Age:</p>
             {{ form2.age }}
           </div>
-          <div class="input-field">
+          <!-- <div class="input-field">
             {{ form2.gender.label_tag }}
             {{ form2.gender }}
           </div>
           <div class="input-field">
             {{ form2.isStudent.label_tag }}
             {{ form2.isStudent }}
-          </div>
+          </div> -->
           <input type="submit" class="btn" value="register" name="register" />
         </form>
       </div>

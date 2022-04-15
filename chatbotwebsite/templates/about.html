@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}
 About
 {% endblock %}
@@ -6,4 +7,76 @@ About
 {% block content %}
 <h1>Welcome to chatbot About page</h1>
 <h4>This page is under construction</h4>
+<link rel="stylesheet" type="text/css" href="{% static 'about.css' %}">
+
+<div class="about-section">
+    <h1>About Us Page</h1>
+    <p>Create a chatbot that will accept the inputs from the user and give out the appropriate response; the
+        response should be the result of the NLP model’s output.
+        Based on the complete chat with the user, the system will predict the mental state of the person using
+        sentiment analysis. The registered user should be able to view the trends of his mental state over a period
+        of time.
+    </p>
+</div>
+
+<h2 style="text-align:center">Our Team</h2>
+<div class="row">
+    <div class="column">
+        <div class="card">
+            <img src="https://media-exp1.licdn.com/dms/image/C5603AQGdq1sSbWh7nw/profile-displayphoto-shrink_800_800/0/1641208210566?e=1654732800&v=beta&t=N62oxbueloIZQ9_BroBZUYKeoNHwvgk1u-o275jyzy4"
+                alt="Jane" style="width:100%">
+            <div class="container">
+                <h2>Yash Tondon </h2>
+                <p class="title">CEO & Founder</p>
+                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
+                <p>jane@example.com</p>
+                <p><button class="button">Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFp7iDmdbU9qg/profile-displayphoto-shrink_800_800/0/1646191671504?e=1654732800&v=beta&t=NoDjm0lnG62Ew8XJKhCG42n6BN7sAlMVraE9OpQUV2Y"
+                alt="Mike" style="width:100%">
+            <div class="container">
+                <h2>Om Rawal</h2>
+                <p class="title">Art Director</p>
+                <p>Github : <a href=" https://github.com/omrawal">github</a></p>
+                <p>Mail :<a href="om.rawal@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a></p>
+                <p>Linkedin :<a href="https://www.linkedin.com/in/om-rawal/">Linkedin</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="column">
+        <div class="card">
+            <img src="https://media-exp1.licdn.com/dms/image/C4E03AQHc7E3OwYk4XA/profile-displayphoto-shrink_800_800/0/1621707741106?e=1654732800&v=beta&t=jW6N43xVdmBbv-87zpHqqzEVBHuhpDUs_AtYi3n-c84"
+                alt="John" style="width:100%">
+            <div class="container">
+                <h2>Hasti Shah </h2>
+                <p class="title"> Frontend Designer</p>
+                <p>Github : <a href=" https://github.com/hasti-15">github</a></p>
+                <p>Mail :<a href="hasti.ds@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a></p>
+                <p>Linkedin :<a href="http://www.linkedin.com/in/hasti-shah-768197211">Linkedin</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="column">
+    <div class="card">
+        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQE2qe5V49MFUA/profile-displayphoto-shrink_800_800/0/1632040211289?e=1654732800&v=beta&t=KeJDFk6BftrAp9-S7EtXAQ9Dcw_cyG491Iz9nyp2OLw"
+            alt="Mike" style="width:100%">
+        <div class="container">
+            <h2>Karthik Jaishankar </h2>
+            <p>Github: <a href="https://github.com/Jikohp">github</a></p>
+            <p>Mail :<a href="mailto:k.jaishankar@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a>
+            </p>
+            <p>Linkedin :<a href="https://www.linkedin.com/in/karthik-jaishankar-6457441a3/">Linkedin</a></p>
+        </div>
+    </div>
+</div>
+</body>
+
 {% endblock %}

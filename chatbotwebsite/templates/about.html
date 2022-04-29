@@ -5,78 +5,95 @@ About
 {% endblock %}
 
 {% block content %}
-<h1>Welcome to chatbot About page</h1>
-<h4>This page is under construction</h4>
 <link rel="stylesheet" type="text/css" href="{% static 'about.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="about-section">
-    <h1>About Us Page</h1>
-    <p>Create a chatbot that will accept the inputs from the user and give out the appropriate response; the
-        response should be the result of the NLP model’s output.
-        Based on the complete chat with the user, the system will predict the mental state of the person using
-        sentiment analysis. The registered user should be able to view the trends of his mental state over a period
-        of time.
-    </p>
-</div>
 
-<h2 style="text-align:center">Our Team</h2>
-<div class="row">
-    <div class="column">
-        <div class="card">
-            <img src="https://media-exp1.licdn.com/dms/image/C5603AQGdq1sSbWh7nw/profile-displayphoto-shrink_800_800/0/1641208210566?e=1654732800&v=beta&t=N62oxbueloIZQ9_BroBZUYKeoNHwvgk1u-o275jyzy4"
-                alt="Jane" style="width:100%">
-            <div class="container">
-                <h2>Yash Tondon </h2>
-                <p class="title">CEO & Founder</p>
-                <p>Some text that describes me lorem ipsum ipsum lorem.</p>
-                <p>jane@example.com</p>
-                <p><button class="button">Contact</button></p>
-            </div>
-        </div>
+<section class="skewedBox">
+    <div class="container1">
+        <img src=" {% static 'logo-modified.png' %}" class="center" width="200" height="200">
+        <h1> About Us </h1>
+        <p>Create a chatbot that will accept the inputs from the user and give out the appropriate response; the
+            response should be the result of the NLP model’s output.
+            Based on the complete chat with the user, the system will predict the mental state of the person
+            using
+            sentiment analysis. The registered user should be able to view the trends of his mental state over a
+            period
+            of time.</p>
     </div>
+</section>
 
-    <div class="column">
-        <div class="card">
+<section class="sec2">
+    <h1>Motivation behind the Project</h1>
+    <p>Mental health includes our emotional, psychological, and social well-being. It affects
+        how we think, feel, and
+        act.
+        It also helps determine how we handle stress, relate to others, and make healthy choices.
+        Although the terms are often used interchangeably, poor mental health and mental illness are not the
+        same
+        things.
+        A person can experience poor mental health and not be diagnosed with a mental illness. Likewise, a
+        person
+        diagnosed with a mental illness can experience periods of physical, mental, and social well-being.</p>
+</section>
+
+
+
+<div class="container">
+    <div class="header">
+        <h1> Our Team</h1>
+
+    </div>
+    <div class="sub-container">
+        <div class="teams">
             <img src="https://media-exp1.licdn.com/dms/image/C4E03AQFp7iDmdbU9qg/profile-displayphoto-shrink_800_800/0/1646191671504?e=1654732800&v=beta&t=NoDjm0lnG62Ew8XJKhCG42n6BN7sAlMVraE9OpQUV2Y"
-                alt="Mike" style="width:100%">
-            <div class="container">
-                <h2>Om Rawal</h2>
-                <p class="title">Art Director</p>
-                <p>Github : <a href=" https://github.com/omrawal">github</a></p>
-                <p>Mail :<a href="om.rawal@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a></p>
-                <p>Linkedin :<a href="https://www.linkedin.com/in/om-rawal/">Linkedin</a></p>
+                alt="">
+            <div class="name">Om Rawal</div>
+            <div class="desig">Backend Developer</div>
+            <!--     <div class="about">loreum dolor sit amet consectetur adipisicing elit.</div> -->
+            <div class="social-links">
+                <a href="mailto:om.rawal@somaiya.edu"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/omrawal"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/om-rawal/"><i class="fa fa-linkedin"></i></a>
             </div>
         </div>
-    </div>
-
-    <div class="column">
-        <div class="card">
+        <div class="teams">
             <img src="https://media-exp1.licdn.com/dms/image/C4E03AQHc7E3OwYk4XA/profile-displayphoto-shrink_800_800/0/1621707741106?e=1654732800&v=beta&t=jW6N43xVdmBbv-87zpHqqzEVBHuhpDUs_AtYi3n-c84"
-                alt="John" style="width:100%">
-            <div class="container">
-                <h2>Hasti Shah </h2>
-                <p class="title"> Frontend Designer</p>
-                <p>Github : <a href=" https://github.com/hasti-15">github</a></p>
-                <p>Mail :<a href="hasti.ds@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a></p>
-                <p>Linkedin :<a href="http://www.linkedin.com/in/hasti-shah-768197211">Linkedin</a></p>
+                alt="">
+            <div class="name">Hasti Shah</div>
+            <div class="desig">Frontend Developer</div>
+            <!--     <div class="about">loreum dolor sit amet consectetur adipisicing elit.</div> -->
+            <div class="social-links">
+                <a href="mailto:hasti.ds@somaiya.edu"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/hasti-15"><i class="fa fa-github"></i></a>
+                <a href="http://www.linkedin.com/in/hasti-shah-768197211"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="teams">
+            <img src="https://media-exp1.licdn.com/dms/image/C4D03AQE2qe5V49MFUA/profile-displayphoto-shrink_800_800/0/1632040211289?e=1654732800&v=beta&t=KeJDFk6BftrAp9-S7EtXAQ9Dcw_cyG491Iz9nyp2OLw"
+                alt="">
+            <div class="name">Kartik Jaishankar</div>
+            <div class="desig">Frontend Developer</div>
+            <!--     <div class="about">loreum dolor sit amet consectetur adipisicing elit.</div> -->
+            <div class="social-links">
+                <a href="mailto:k.jaishankar@somaiya.edu"><i class="fa fa-envelope"></i></a>
+                <a href="https://github.com/Jikohp"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/karthik-jaishankar-6457441a3/"><i class="fa fa-linkedin"></i></a>
+            </div>
+        </div>
+        <div class="teams">
+            <img src="https://media-exp1.licdn.com/dms/image/C5603AQGdq1sSbWh7nw/profile-displayphoto-shrink_800_800/0/1641208210566?e=1654732800&v=beta&t=N62oxbueloIZQ9_BroBZUYKeoNHwvgk1u-o275jyzy4"
+                alt="">
+            <div class="name">Yash Tandon</div>
+            <div class="desig">Developer</div>
+            <!--     <div class="about">loreum dolor sit amet consectetur adipisicing elit.</div> -->
+            <div class="social-links">
+                <a href="mailto:yash.tandon@somaiya.edu"><i class="fa fa-envelope"></i></a>
+                <a href="#"><i class="fa fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/yash-tandon-a2598a1a3/"><i class="fa fa-linkedin"></i></a>
             </div>
         </div>
     </div>
 </div>
-
-<div class="column">
-    <div class="card">
-        <img src="https://media-exp1.licdn.com/dms/image/C4D03AQE2qe5V49MFUA/profile-displayphoto-shrink_800_800/0/1632040211289?e=1654732800&v=beta&t=KeJDFk6BftrAp9-S7EtXAQ9Dcw_cyG491Iz9nyp2OLw"
-            alt="Mike" style="width:100%">
-        <div class="container">
-            <h2>Karthik Jaishankar </h2>
-            <p>Github: <a href="https://github.com/Jikohp">github</a></p>
-            <p>Mail :<a href="mailto:k.jaishankar@somaiya.edu ? subject=Learn about MailTo tags in HTML">Mail</a>
-            </p>
-            <p>Linkedin :<a href="https://www.linkedin.com/in/karthik-jaishankar-6457441a3/">Linkedin</a></p>
-        </div>
-    </div>
-</div>
-</body>
 
 {% endblock %}

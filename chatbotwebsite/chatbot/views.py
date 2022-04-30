@@ -11,7 +11,11 @@ from datetime import datetime
 import pytz
 from requests.exceptions import ConnectionError
 import requests
-# Create your views here.
+
+# https://codepen.io/imprakash/pen/GgNMXO
+
+
+
 
 CHATS = []  # list of tuples (user_query,bot_response)
 CHATBOT_URL = 'http://localhost:5000/'
@@ -172,6 +176,8 @@ def chatPage(request):
                                  posCount=sentiments['positive_score'],
                                  negCount=sentiments['negative_score'])
             scoreObj.save()
+            # return redirect('profile')
+
 
     activate = False
     if(len(CHATS) > 5):

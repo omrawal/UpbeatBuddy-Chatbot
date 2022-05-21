@@ -30,18 +30,12 @@ Login/Register
           {% if form3.errors %}
           <p>There are errors in the form</p>
           {% endif %}
-          <!-- {{form3}} -->
           <h2 class="title">Sign in</h2>
-
           <div class="input-field">
-            <!-- <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Username" /> -->
             <p>Username:</p>
             {{ form3.username }}
           </div>
           <div class="input-field">
-            <!-- <i class="fas fa-lock"></i>
-                        <input type="password" placeholder="Password" /> -->
             <p>Password:</p>
             {{ form3.password }}
           </div>
@@ -84,14 +78,6 @@ Login/Register
             <p>Age:</p>
             {{ form2.age }}
           </div>
-          <!-- <div class="input-field">
-            {{ form2.gender.label_tag }}
-            {{ form2.gender }}
-          </div>
-          <div class="input-field">
-            {{ form2.isStudent.label_tag }}
-            {{ form2.isStudent }}
-          </div> -->
           <input type="submit" class="btn" value="register" name="register" />
         </form>
       </div>

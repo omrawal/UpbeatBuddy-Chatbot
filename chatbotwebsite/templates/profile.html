@@ -38,6 +38,23 @@ Profile
   tr:hover {
     background-color: cyan;
   }
+
+  #popup-1 {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: left;
+    height: 100vh;
+    width: 100%;
+  }
+
+  .popup-content {
+    position: relative;
+    padding: 20px;
+    margin: 0 auto;
+    background-color: white;
+    width: 400px;
+    top: 5vh;
+  }
 </style>
 <!-- <link rel="stylesheet" type="text/css" href="{% static 'style1.css' %}"> -->
 <!-- <h1>Welcome {{request.user}}</h1> -->
@@ -51,23 +68,27 @@ Profile
 {%if newUser %}
 <h3>Please chat to get happiness index</h3>
 {%else%}
+{% if dataObj %}
+<div id="popup-1">
+  <div class="popup-content">
+    <h1>Analysis of current chat session</h1>
+    <p>Happiness Index :{{dataObj.score}}</p>
+    <p>Positive Sentence Count :{{dataObj.posCount}}</p>
+    <p>Negative Sentence Count :{{dataObj.negCount}}</p>
+
+    <button id="close-popup-1">Close</button>
+  </div>
+</div>
+{%endif%}
 <main class="container">
   <div class="row" style="background-color:white;">
     <div class="column">
-      <!--     <h2>Column 1</h2>
-    <p>Some text..</p> -->
       <br>
       <br>
       <br>
       <h2>Let's have a look at your progress</h2>
-      <!--     <canvas id="myChart" style="width:100%;max-width:700px"></canvas> -->
-
-
-
       <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-
       <script>
-
         var xValues = JSON.parse("{{ xValues|escapejs }}");
         var yValues = JSON.parse("{{ yValues|escapejs }}");
 
@@ -121,10 +142,7 @@ Profile
 
     </div>
     <div class="column" style="background-color:white;">
-      <!-- <h2>Column 2</h2>
-    <p>Some text..</p> -->
       <div class="card-container">
-        <!-- 	<span class="pro">PRO</span> -->
         <img class="round" src="https://randomuser.me/api/portraits/women/79.jpg" alt="user" />
         <h3>{{request.user}}</h3>
         <h6>Age : {{age}}</h6>
@@ -157,6 +175,15 @@ Profile
     </div>
   </div>
 </main>
+<script>
+
+  var popup1 = document.getElementById("popup-1")
+  var closePopup1 = document.getElementById('close-popup-1')
+  popup1.style.display = "block";
+  closePopup1.addEventListener('click', () => {
+    popup1.style.display = "none";
+  })
+</script>
 
 {%endif%}
 {% endblock %}

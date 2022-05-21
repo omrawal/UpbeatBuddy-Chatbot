@@ -76,7 +76,6 @@ Chatpage
             <form action="{% url 'chatpage' %}" method="post">
               <div class="conversation-editor">
                 <!-- Safe -->
-
                 {% csrf_token %}
                 <input type="text" name="userquery" placeholder="Write a message" style="width:240%"
                   style="float: inline-block;" />
@@ -84,16 +83,6 @@ Chatpage
                 {% if activate %}
                 <input type="submit" class="btn-success " value="Check Emotion" name="Check Emotion" />
                 {% endif %}
-
-
-
-                <!-- <input type="text" name="userquery" placeholder="write a message" style="width:240%"
-                style="float: inline-block;" />
-              <input type="submit" class="btn-info " value="send" name="send" style="float: inline-block" />
-
-              </form> -->
-
-
               </div>
             </form>
           </section>

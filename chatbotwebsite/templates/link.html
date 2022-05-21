@@ -23,9 +23,6 @@ Update Link
   <h4>Sentiment Analysis API Status: Not Working &#10060;</h4>
   {% endif %}
 
-
-
-
   <form action="{% url 'linkpage' %}" method="post">
     {% csrf_token %}
     <input type="text" name="chatbotLink" placeholder="Chatbot API Link" style="width:80%"

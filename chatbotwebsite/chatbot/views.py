@@ -1,3 +1,4 @@
+from glob import glob
 from json import dump, dumps
 from .forms import ChatbotUserForm
 from django.shortcuts import render, redirect
@@ -5,27 +6,26 @@ from django.http import HttpResponse, request
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib import messages
 from .models import UserScore, ChatbotUser
 from datetime import datetime
 import pytz
 from requests.exceptions import ConnectionError
 import requests
 
-# https://codepen.io/imprakash/pen/GgNMXO
-
 
 
 
 CHATS = []  # list of tuples (user_query,bot_response)
+# External or default URL goes here
 CHATBOT_URL = 'http://localhost:5000/'
 # CHATBOT_URL = 'http://localhost:5200/'
 SENTIMENT_URL = 'http://localhost:5500/'
 # SENTIMENT_URL = 'http://localhost:5300/'
 
+# New Analysis data
+DataObj=None
 
 # helper methods
-
 def checkUrl(url):
     try:
         request = requests.get(url)
@@ -37,8 +37,6 @@ def checkUrl(url):
 
 def getChatbotResponse(userQuery):
     global CHATBOT_URL
-    # response = requests.get(
-    #     url=CHATBOT_URL+userQuery)
     response = requests.post(url=CHATBOT_URL, params={
                              'userQuery': str(userQuery)})
     responseJson = response.json()
@@ -97,21 +95,14 @@ def loginPage(request):
     form1 = None
     form2 = None
     if request.method == 'POST':
-        print("Got post")
-        print(dict(request.POST.items()))
         # the Post request is to register a new user
         if('register' in request.POST):
             form1 = UserCreationForm(data=request.POST)
             form2 = ChatbotUserForm(request.POST)
-            print('#### Form 1 ####', form1)
-            print('#### Form 2 ####', form2)
-            print("Validity 1 ### ", form1.is_valid())
-            print("Validity 2 ### ", form2.is_valid())
             if (form1.is_valid() and form2.is_valid()):
                 print("Saving form1 .................", form1.save())
                 username = form1.cleaned_data['username']
                 password = form1.cleaned_data['password1']
-                print("Username and password are ->>>", username, password)
                 user = authenticate(username=username, password=password)
                 login(request, user)
                 form2 = ChatbotUserForm(request.POST)
@@ -126,7 +117,6 @@ def loginPage(request):
         elif('login' in request.POST):
             username = request.POST.get('username')
             password = request.POST.get('password')
-            print(username, password)
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
@@ -144,25 +134,20 @@ def loginPage(request):
         form1 = UserCreationForm()
         form2 = ChatbotUserForm()
         form3 = AuthenticationForm()
-        print("#### form 3 ##", form3)
         context = {'form1': form1, 'form2': form2, 'form3': form3}
         return render(request, "login.html", context)
 
 
 @login_required(login_url='login')
 def chatPage(request):
-    # chatbot_url = getChatbotUrl()
-    # sentiment_url = getSentimentUrl()
-    # if(checkUrl(chatbot_url) == False or checkUrl(sentiment_url) == False):
-    #     return redirect('linkpage')
     global CHATS
+    global DataObj
     sentiments = None
     if request.method == 'POST':
         if('Send' in request.POST):
             print("User sent ->>>", request.POST.get('userquery'))
             userQuery = request.POST.get('userquery')
             chat = getChatbotResponse(userQuery=userQuery)
-            # print('first-----', chat)
             CHATS.append(chat)
         if('Check Emotion' in request.POST):
             print("User tried to check ->>>")
@@ -176,21 +161,23 @@ def chatPage(request):
                                  posCount=sentiments['positive_score'],
                                  negCount=sentiments['negative_score'])
             scoreObj.save()
-            # return redirect('profile')
+            DataObj=scoreObj
+            return redirect('profile')
 
 
     activate = False
-    if(len(CHATS) > 5):
+    if(len(CHATS) > 2):
         activate = True
     context = {'userdata': [request], 'chats': CHATS,
                'sentiments': sentiments, 'activate': activate, 'now': datetime.now(pytz.timezone('Asia/Kolkata')
                                                                                    ).strftime("%d-%m-%Y %H:%M:%S"), }
-    # print('second-----', CHATS)
     return render(request, "chatpage.html", context=context)
 
 
 @login_required(login_url='login')
 def profilePage(request):
+    global DataObj
+    
     current = ChatbotUser.objects.get(user=request.user)
     scoreobj = UserScore.objects.filter(
         owner=current)
@@ -211,9 +198,6 @@ def profilePage(request):
             k = ('score =', scr.score, ' pos = ',
                  scr.posCount, ' neg = ', scr.negCount, ' date= ', scr.updatedAt.strftime(
                      "%d/%m/%Y - %H:%M:%S"))
-            print(k)
-            # xValues.append(int(scr.updatedAt.strftime(
-            #     "%d")))
             xValues.append(int(scr.updatedAt.strftime(
                 "%d")+scr.updatedAt.strftime(
                 "%m")+scr.updatedAt.strftime(
@@ -222,17 +206,22 @@ def profilePage(request):
             posValues.append(scr.posCount)
             negValues.append(scr.negCount)
             userScoreData.append(k)
-        #     var xValues = [50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150];
-        #   var yValues = [7, 8, 8, 9, 9, 9, 10, 11, 14, 14, 15];
         context = {'newUser': False, 'scores': userScoreData, 'xValues': xValues, 'yValues': yValues, 'posVal': sum(
             posValues), 'negVal': sum(negValues), 'avgScore': round(sum(yValues)/len(yValues), 2), 'age': current.age, 'email': current.email}
-    print(context)
+    if(DataObj!=None):
+        context['dataObj']=DataObj
+        DataObj=None
+    else:
+        context['dataObj']=None
+
     return(render(request, "profile.html", context=context))
 
 
 def logoutPage(request):
     logout(request)
     global CHATS
+    global DataObj
+    DataObj=None
     CHATS = []
     return render(request, 'logout.html')
 
@@ -241,7 +230,6 @@ def logoutPage(request):
 def linkPage(request):
     chatbot_url = getChatbotUrl()
     sentiment_url = getSentimentUrl()
-    print('chaturl= ', chatbot_url, ' sentiment_url= ', sentiment_url)
     chatbotAPIStatus = False
     sentimentAPIStatus = False
     if(checkUrl(chatbot_url)):
@@ -260,11 +248,3 @@ def linkPage(request):
         return redirect('chatpage')
     return render(request, 'link.html', context=context)
 
-# Test
-# Test@123
-# Test@gmail.com
-
-
-# TestUser2
-# Test2@999
-# TestUser@gmail.com

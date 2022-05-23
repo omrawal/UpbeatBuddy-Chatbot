@@ -2,8 +2,8 @@
 Chatbot for detecting (depression) mental state of students.
 Built on Django.
 Required Repositories:
-- [x] **[https://github.com/omrawal/UpbeatBuddy-Chatbot](https://github.com/omrawal/Chatbot-API)**
-- [x] **[https://github.com/omrawal/UpbeatBuddy-Chatbot](https://github.com/omrawal/Sentimental_Analysis_API)**
+- [x] **[https://github.com/omrawal/Chatbot-API](https://github.com/omrawal/Chatbot-API)**
+- [x] **[https://github.com/omrawal/Sentimental_Analysis_API](https://github.com/omrawal/Sentimental_Analysis_API)**
 
 - Demonstration
 
